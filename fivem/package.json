@@ -1,0 +1,11 @@
+{
+  "name": "spotifive-fivem",
+  "version": "0.0.1",
+  "description": "SpotiFive Reload FiveM script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IceHax",
+  "license": "AGPL-3.0-or-later"
+}
