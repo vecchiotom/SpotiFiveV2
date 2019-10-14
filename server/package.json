@@ -4,7 +4,14 @@
   "description": "SpotiFive Reload node.js server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg index.js"
+  },
+  "pkg": {
+    "assets": [],
+    "targets": [
+      "latest"
+    ]
   },
   "author": "IceHax",
   "license": "AGPL-3.0-or-later"
