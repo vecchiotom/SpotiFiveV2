@@ -104,3 +104,5 @@ public
 *.exe
 index-macos
 index-linux
+
+package-lock.json
