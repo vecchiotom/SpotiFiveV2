@@ -62,6 +62,51 @@ module.exports.setUp = (app, con) => {
 
                     break;
 
+                case "pause":
+                    console.log("play command received for user: " + req.query.id)
+                    spotifyApi.pause()
+                        .then(() => {
+                            res.json({})
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                            res.json({
+                                error: err.message
+                            })
+                        })
+
+                    break;
+
+                case "volume":
+                    console.log("play command received for user: " + req.query.id)
+                    spotifyApi.setVolume(info[0])
+                        .then(() => {
+                            res.json({})
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                            res.json({
+                                error: err.message
+                            })
+                        })
+
+                    break;
+
+                case "getplaylists":
+                    console.log("play command received for user: " + req.query.id)
+                    spotifyApi.getUserPlaylists(info[0])
+                        .then((playlists) => {
+                            res.json(playlists)
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                            res.json({
+                                error: err.message
+                            })
+                        })
+
+                    break;
+
                 default:
                     console.log("invalid command received, ignoring.")
                     res.json({
@@ -110,8 +155,8 @@ const refreshAccessToken = (con, id, res, cb) => {
 
 function arrayRemove(arr, value) {
 
-    return arr.filter(function(ele){
+    return arr.filter(function (ele) {
         return ele != value;
     });
- 
- }
+
+}
