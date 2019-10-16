@@ -1,0 +1,3 @@
+Config = {
+    host="http://localhost"
+}

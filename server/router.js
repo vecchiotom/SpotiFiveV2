@@ -39,7 +39,6 @@ module.exports.setUp = (app, con) => {
 
         refreshAccessToken(con, req.query.id, res, (access_token) => {
             var info = (req.query.info) ? JSON.parse(req.query.info) : []
-            console.log(info)
             spotifyApi.setAccessToken(access_token);
 
             switch (req.query.command) {
@@ -58,12 +57,13 @@ module.exports.setUp = (app, con) => {
                             res.json({
                                 error: err.message
                             })
+                            console.error(err.message)
                         })
 
                     break;
 
                 case "pause":
-                    console.log("play command received for user: " + req.query.id)
+                    console.log("pause command received for user: " + req.query.id)
                     spotifyApi.pause()
                         .then(() => {
                             res.json({})
@@ -73,12 +73,13 @@ module.exports.setUp = (app, con) => {
                             res.json({
                                 error: err.message
                             })
+                            console.error(err.message)
                         })
 
                     break;
 
                 case "volume":
-                    console.log("play command received for user: " + req.query.id)
+                    console.log("volume command received for user: " + req.query.id)
                     spotifyApi.setVolume(info[0])
                         .then(() => {
                             res.json({})
@@ -88,12 +89,13 @@ module.exports.setUp = (app, con) => {
                             res.json({
                                 error: err.message
                             })
+                            console.error(err.message)
                         })
 
                     break;
 
                 case "getplaylists":
-                    console.log("play command received for user: " + req.query.id)
+                    console.log("getplaylists command received for user: " + req.query.id)
                     spotifyApi.getUserPlaylists(info[0])
                         .then((playlists) => {
                             res.json(playlists)
@@ -103,6 +105,7 @@ module.exports.setUp = (app, con) => {
                             res.json({
                                 error: err.message
                             })
+                            console.error(err.message)
                         })
 
                     break;
