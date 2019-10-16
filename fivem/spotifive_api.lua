@@ -24,3 +24,11 @@ function SpotiFive.Play(track, uris, id)
     local url = Config.host.."/fivem/request?command=play&id="..id.."&info=".._encodeString(uris)
     PerformHttpRequest(url, function (errorCode, resultData, resultHeaders)end)
 end
+
+function SpotiFive.Pause(id)
+
+    id = _getSteamId64FromHex(string.sub(id, 7))
+
+    local url = Config.host.."/fivem/request?command=pause&id="..id
+    PerformHttpRequest(url, function (errorCode, resultData, resultHeaders)end)
+end

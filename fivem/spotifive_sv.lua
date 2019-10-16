@@ -3,6 +3,11 @@ RegisterCommand("play", function(source, args, rawCommand)
     SpotiFive.Play(true,{"spotify:track:3V8UKqhEK5zBkBb6d6ub8i", "spotify:track:7thTA3hqO2MgOlzo0rPInX"}, id)
 end, false)
 
+RegisterCommand("pause", function(source, args, rawCommand)
+    local id = getID(1, source)
+    SpotiFive.Pause(id)
+end, false)
+
 function getID(type, source)
     for k,v in ipairs(GetPlayerIdentifiers(source)) do
         if string.sub(tostring(v), 1, string.len("steam:")) == "steam:" and (type == "steam" or type == 1) then
