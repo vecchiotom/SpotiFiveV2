@@ -37,18 +37,26 @@ module.exports.setUp = (app, con) => {
 
     app.get('/fivem/request', (req, res) => {
 
-        refreshAccessToken(con, req.query.id, res, (access_token) => {
+        refreshAccessToken(con, req.query.id, res, async (access_token) => {
             var info = (req.query.info) ? JSON.parse(req.query.info) : []
             spotifyApi.setAccessToken(access_token);
 
             switch (req.query.command) {
                 case "play":
                     console.log("play command received for user: " + req.query.id)
-                    spotifyApi.play((info[0] == "track") ? {
-                            "uris": arrayRemove(info, "track")
-                        } : {
-                            "context_uri": info[0]
-                        })
+                    for (let i = 0; i < info.length; i++) {
+                        await spotifyApi.search(info[i], ['track'], {
+                                limit: 1
+                            })
+                            .then(response => {
+                                info[i] = response.body.tracks.items[0].uri
+                            })
+                    }
+
+
+                    spotifyApi.play((info.length > 0) ? {
+                            uris: info
+                        } : {})
                         .then(() => {
                             res.json({})
                         })
@@ -99,6 +107,19 @@ module.exports.setUp = (app, con) => {
                     spotifyApi.getUserPlaylists(info[0])
                         .then((playlists) => {
                             res.json(playlists)
+                        })
+                        .catch((err) => {
+                            res.status(500)
+                            res.json({
+                                error: err.message
+                            })
+                            console.error(err.message)
+                        })
+                case "currentplayback":
+                    console.log("currentplayback command received for user: " + req.query.id)
+                    spotifyApi.getMyCurrentPlayingTrack()
+                        .then((response) => {
+                            res.json(response.body)
                         })
                         .catch((err) => {
                             res.status(500)
