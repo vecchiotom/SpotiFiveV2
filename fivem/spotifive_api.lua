@@ -70,7 +70,7 @@ function SpotiFive.GetCurrentPlayback(id, cb)
             for i, v in ipairs(resultData.item.artists) do
                 table.insert(artists, v.name)
             end
-            cb(title, timestamp, duration, json.encode(artists))
+            cb(title, timestamp, duration, artists)
         end
     )
 end
@@ -84,8 +84,8 @@ AddEventHandler(
             getID(1, source),
             function(title, timestamp, duration, artists)
                 local source = source
-                TriggerClientEvent("SpotiFive:GetCurrentPlayback", source, title, timestamp, duration, artists)
-                print("trigger " .. source)
+                TriggerClientEvent("SpotiFive:CurrentPlaybackCallback", source, title, timestamp, duration, artists)
+                collectgarbage()
             end
         )
     end
