@@ -24,7 +24,7 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
  
 // IP Whitelist
-app.use(ipfilter(ips, { mode: 'allow' }))
+//app.use(ipfilter(ips, { mode: 'allow' }))
 
 // database connection
 con.connect(function (err) {
