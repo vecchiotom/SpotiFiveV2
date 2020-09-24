@@ -11,7 +11,7 @@ It's very simple:
 * get a MySQL database
 * run this query on it:
 
-```
+```mysql
 CREATE TABLE `accounts` (
   `steam` varchar(17) NOT NULL,
   `access_token` mediumtext,
