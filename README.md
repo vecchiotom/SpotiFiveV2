@@ -22,6 +22,7 @@ CREATE TABLE `accounts` (
 ```
 
 * run buildserver.bat and wait for everything to install and build
+* in the server folder you'll find your EXE, and even MacOS and Linux versions, just run them and your server will be up just like that!
 * make sure in the same folder you have a file named .env, with this content:
 
 ```
@@ -36,8 +37,6 @@ APP_PROTOCOL = http://
 WHITELIST_IP = '::1'
 
 ```
-
-* in the server folder you'll find your EXE, and even MacOS and Linux versions, just run them and your server will be up just like that!
 
 check "localhost" and see if it's working.
 
